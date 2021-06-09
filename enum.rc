@@ -1,0 +1,143 @@
+setg verbose true
+
+spool logs/ftp_version
+use auxiliary/scanner/ftp/ftp_version
+set rhosts file:ftp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ftp_anon
+use auxiliary/scanner/ftp/anonymous
+set rhosts file:ftp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ssh_version
+use auxiliary/scanner/ssh/ssh_version
+set rhosts file:ssh-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/telnet_version
+use auxiliary/scanner/telnet/telnet_version
+set rhosts file:telnet-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/smb_version
+use auxiliary/scanner/smb/smb_version
+set rhosts file:smb-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/mssql_ping
+use auxiliary/scanner/mssql/mssql_ping
+set rhosts file:mssql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/mysql_version
+use auxiliary/scanner/mysql/mysql_version
+set rhosts file:mysql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/rdp_scanner
+use auxiliary/scanner/rdp/rdp_scanner
+set rhosts file:rdp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ms12_020_check
+use auxiliary/scanner/rdp/ms12_020_check
+set rhosts file:rdp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ipmi_version
+use auxiliary/scanner/ipmi/ipmi_version
+set rhosts file:ipmi-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ipmi_dumphashes
+use auxiliary/scanner/ipmi/ipmi_dumphashes
+set rhosts file:ipmi-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ipmi_cipher_zero
+use auxiliary/scanner/ipmi/ipmi_cipher_zero
+set rhosts file:ipmi-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/cisco_ike_benigncertain
+use auxiliary/scanner/ike/cisco_ike_benigncertain
+set rhosts file:ike-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/snmp_login
+use auxiliary/scanner/snmp/snmp_login
+set rhosts file:snmp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/snmp_enum
+use auxiliary/scanner/snmp/snmp_enum
+set rhosts file:snmp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/nfsmount
+use auxiliary/scanner/nfs/nfsmount
+set rhosts file:nfs-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/nbname
+use auxiliary/scanner/netbios/nbname
+set rhosts file:nbt-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ssdp_msearch
+use auxiliary/scanner/upnp/ssdp_msearch
+set rhosts file:upnp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/vnc_none_auth
+use auxiliary/scanner/vnc/vnc_none_auth
+set rhosts file:vnc-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/open_x11
+use auxiliary/scanner/x11/open_x11
+set rhosts file:x11-hosts
+run
+spool off
+unset rhosts
+
+exit
