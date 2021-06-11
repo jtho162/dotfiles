@@ -1,22 +1,10 @@
 setg verbose true
+setg smbdomain file:domain.txt
 
+# System Enumeration
 spool logs/ftp_version
 use auxiliary/scanner/ftp/ftp_version
 set rhosts file:ftp-hosts.txt
-run
-spool off
-unset rhosts
-
-spool logs/ftp_anon
-use auxiliary/scanner/ftp/anonymous
-set rhosts file:ftp-hosts.txt
-run
-spool off
-unset rhosts
-
-spool logs/ssh_version
-use auxiliary/scanner/ssh/ssh_version
-set rhosts file:ssh-hosts.txt
 run
 spool off
 unset rhosts
@@ -28,16 +16,9 @@ run
 spool off
 unset rhosts
 
-spool logs/smb_version
-use auxiliary/scanner/smb/smb_version
-set rhosts file:smb-hosts.txt
-run
-spool off
-unset rhosts
-
-spool logs/mssql_ping
-use auxiliary/scanner/mssql/mssql_ping
-set rhosts file:mssql-hosts.txt
+spool logs/ssh_version
+use auxiliary/scanner/ssh/ssh_version
+set rhosts file:ssh-hosts.txt
 run
 spool off
 unset rhosts
@@ -49,20 +30,6 @@ run
 spool off
 unset rhosts
 
-spool logs/rdp_scanner
-use auxiliary/scanner/rdp/rdp_scanner
-set rhosts file:rdp-hosts.txt
-run
-spool off
-unset rhosts
-
-spool logs/ms12_020_check
-use auxiliary/scanner/rdp/ms12_020_check
-set rhosts file:rdp-hosts.txt
-run
-spool off
-unset rhosts
-
 spool logs/ipmi_version
 use auxiliary/scanner/ipmi/ipmi_version
 set rhosts file:ipmi-hosts.txt
@@ -70,37 +37,23 @@ run
 spool off
 unset rhosts
 
-spool logs/ipmi_dumphashes
-use auxiliary/scanner/ipmi/ipmi_dumphashes
-set rhosts file:ipmi-hosts.txt
+spool logs/smb_version
+use auxiliary/scanner/smb/smb_version
+set rhosts file:smb-hosts.txt
 run
 spool off
 unset rhosts
 
-spool logs/ipmi_cipher_zero
-use auxiliary/scanner/ipmi/ipmi_cipher_zero
-set rhosts file:ipmi-hosts.txt
+spool logs/pipe_auditor
+use auxiliary/scanner/smb/pipe_auditor
+set rhosts file:smb-hosts.txt
 run
 spool off
 unset rhosts
 
-spool logs/cisco_ike_benigncertain
-use auxiliary/scanner/ike/cisco_ike_benigncertain
-set rhosts file:ike-hosts.txt
-run
-spool off
-unset rhosts
-
-spool logs/snmp_login
-use auxiliary/scanner/snmp/snmp_login
-set rhosts file:snmp-hosts.txt
-run
-spool off
-unset rhosts
-
-spool logs/snmp_enum
-use auxiliary/scanner/snmp/snmp_enum
-set rhosts file:snmp-hosts.txt
+spool logs/nbname
+use auxiliary/scanner/netbios/nbname
+set rhosts file:smb-hosts.txt
 run
 spool off
 unset rhosts
@@ -112,16 +65,143 @@ run
 spool off
 unset rhosts
 
-spool logs/nbname
-use auxiliary/scanner/netbios/nbname
-set rhosts file:nbt-hosts.txt
+spool logs/sunrpc_portmapper
+use auxiliary/scanner/misc/sunrpc_portmapper
+set rhosts file:nfs-hosts.txt
 run
 spool off
 unset rhosts
 
-spool logs/ssdp_msearch
-use auxiliary/scanner/upnp/ssdp_msearch
-set rhosts file:upnp-hosts.txt
+spool logs/tftpbrute
+use auxiliary/scanner/tftp/tftpbrute
+set rhosts file:tftp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/rsync_modules
+use auxiliary/scanner/rsync/modules_list
+set rhosts file:rsync-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/mssql_ping
+use auxiliary/scanner/mssql/mssql_ping
+set rhosts file:mssql-hosts.txt
+run
+spool off
+unset rhosts
+
+# Potential Username Enumeration
+
+spool logs/smb_enumusers
+use auxiliary/scanner/smb/smb_enumusers
+set rhosts file:smb-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/snmp_enum_hp_laserjet
+use auxiliary/scanner/snmp/snmp_enum_hp_laserjet
+set rhosts file:snmp-hosts.txt
+run
+set version 2c
+run
+spool off
+unset rhosts
+
+spool logs/xerox_workcentre_enumusers
+use auxiliary/scanner/snmp/xerox_workcentre_enumusers
+set rhosts file:snmp-hosts.txt
+run
+set community private
+run
+set version 2c
+run
+set community public
+run
+spool off
+unset rhosts
+
+# Anonymous and Default Authentication
+
+spool logs/ftp_anon
+use auxiliary/scanner/ftp/anonymous
+set rhosts file:ftp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ftp_login
+use auxiliary/scanner/ftp/ftp_login
+set rhosts file:ftp-hosts.txt
+set userpass_file userpass.txt
+run
+spool off
+unset rhosts
+
+spool logs/ssh_login
+use auxiliary/scanner/ssh/ssh_login
+set rhosts file:ssh-hosts.txt
+set userpass_file userpass.txt
+run
+spool off
+unset rhosts
+
+spool logs/telnet_login
+use auxiliary/scanner/telnet/telnet_login
+set rhosts file:telnet-hosts.txt
+set userpass_file userpass.txt
+run
+spool off
+unset rhosts
+
+spool logs/mssql_login
+use auxiliary/scanner/mssql/mssql_login
+set rhosts file:mssql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/mssql_hashdump
+use auxiliary/scanner/mssql/mssql_hashdump
+set rhosts file:mssql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/mssql_schemadump
+use auxiliary/scanner/mssql/mssql_schemadump
+set rhosts file:mssql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/snmp_enum
+use auxiliary/scanner/snmp/snmp_enum
+set rhosts file:snmp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/cisco_config_tftp
+use auxiliary/scanner/snmp/cisco_config_tftp
+set rhosts file:snmp-hosts.txt
+run
+set community private
+run
+set version 2c
+run
+set community public
+run
+spool off
+unset rhosts
+
+spool logs/snmp_login
+use auxiliary/scanner/snmp/snmp_login
+set rhosts file:snmp-hosts.txt
+set version all
 run
 spool off
 unset rhosts
@@ -140,4 +220,99 @@ run
 spool off
 unset rhosts
 
-exit
+spool logs/postgres_login
+use auxiliary/scanner/postgres/postgres_login
+set rhosts file:postgresql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/postgres_schemadump
+use auxiliary/scanner/postgres/postgres_schemadump
+set rhosts file:postgresql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/postgres_hashdump
+use auxiliary/scanner/postgres/postgres_hashdump
+set rhosts file:postgresql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/mysql_login
+use auxiliary/scanner/mysql/mysql_login
+set rhosts file:mysql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/mssql_hashdump
+use auxiliary/scanner/mysql/mysql_hashdump
+set rhosts file:mysql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/mssql_schemadump
+use auxiliary/scanner/mysql/mysql_schemadump
+set rhosts file:mysql-hosts.txt
+run
+spool off
+unset rhosts
+
+# Vulnerability Checks
+
+spool logs/ms17_010
+use auxiliary/scanner/smb/smb_ms17_010
+set rhosts file:smb-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ms12_020_check
+use auxiliary/scanner/rdp/ms12_020_check
+set rhosts file:rdp-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ipmi_dumphashes
+use auxiliary/scanner/ipmi/ipmi_dumphashes
+set rhosts file:ipmi-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/ipmi_cipher_zero
+use auxiliary/scanner/ipmi/ipmi_cipher_zero
+set rhosts file:ipmi-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/postgres_flag_injection
+use auxiliary/scanner/postgres/postgres_dbname_flag_injection
+set rhosts file:postgresql-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/heartbleed
+use auxiliary/scanner/ssl/openssl_heartbleed
+set rhosts file:https-hosts.txt
+run
+set rhosts file:http-8443-hosts.txt
+run
+spool off
+unset rhosts
+
+spool logs/webdav
+use auxiliary/scanner/http/ms09_020_webdav_unicode_bypass
+set rhosts file:https-hosts.txt
+run
+set rhosts file:http-hosts.txt
+run
+spool off
+unset rhosts
