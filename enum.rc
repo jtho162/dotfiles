@@ -316,3 +316,5 @@ set rhosts file:http-hosts.txt
 run
 spool off
 unset rhosts
+
+exit
